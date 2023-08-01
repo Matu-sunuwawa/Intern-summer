@@ -1,0 +1,2 @@
+mahlet,mama,80
+matyas,mama,0
