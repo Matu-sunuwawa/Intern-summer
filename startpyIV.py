@@ -165,6 +165,7 @@ print(data)
 """
 
 
+"""
 #student.py
 n = int(input("Enter the number of student: "))
 data = {}
@@ -175,6 +176,7 @@ for i in range(0, n):   #from 0 to n-1
     for x in lang:
         marks.append(int(input("Enter the marks of %s: " % x))) #marks.append('biology')
     data[name] = marks
+    print(data)
 for x,y in data.items():
     total = sum(y)
     print("%s's total marks %d" % (x, total))
@@ -182,6 +184,7 @@ for x,y in data.items():
         print("%s failed :(" % x)
     else:
         print("%s passed :)" % x)
+"""
 
 
 """

@@ -3,21 +3,14 @@ class Signup:
     def __init__(self):
         self.username = input("Enter a username: ")
         self.password = input("Enter a password: ")
-        self.value = 0
     def register(self):
         print("-------------------Registration Page-------------------")
 
-        f1 = open(f"{self.username}Saving","x")
-        f2 = open(f"{self.username}Credit","x")
-
-        u = ' '.join(format(ord(x), 'b') for x in self.username)
-        p =' '.join(format(ord(x), 'b') for x in self.password)
+        f1 = open(f"{self.username}","x")
 
 
-        with open(f"{self.username}Saving","a") as file:
-            file.write(f'{u},{p},{self.value}\n')
-        with open(f"{self.username}Credit","a") as file:
-            file.write(f"{u},{p},{self.value}\n")
+        with open(f"{self.username}","a") as file:
+            file.write(f'{self.username},{self.password}\n')
         
         print("Registration Successful!")
         print("")
@@ -31,18 +24,34 @@ class Signin:
     def login(self):
         print("-------------------Login Page-------------------")
         try:
-            with open(f"{self.username}Saving","r") as file:
+            with open(f"{self.username}","r") as file:
                 for line in file:
-                    stored_username,stored_password,stored_value = line.strip().split(",")
-                    u = ''.join(chr(int(stored_username[i*8:i*8+8],2)) for i in range(len(stored_username)//7))
-                    p = ''.join(chr(int(stored_password[i*8:i*8+8],2)) for i in range(len(stored_password)//7))
-                    if self.username == u and self.password == p:
-                        Signin.select(self)
+                    stored_username,stored_password = line.strip().split(",")
+                    if self.username == stored_username and self.password == stored_password:
+                        print("It is Ok!")
                         return
             print("")
-            self.all()
         except:
             print("There is no such file or you may miss the wright username or password information!\nPlease be register!")
             All.all(self)
         
- 
+class All:
+    def all(self):
+        print("1.signin\n2.signup\n3.exit")
+        number = int(input("Enter a number: "))
+
+        match number:
+            case 1:
+                x = Signin()
+                x.login()
+            case 2:
+                x = Signup()
+                x.register()
+            case 3:
+                exit
+            case _:
+                print("Please follow the above guide")
+                all()
+
+x = All()
+x.all()
