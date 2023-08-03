@@ -131,4 +131,42 @@ for i in range(n):
     print("")
 """
 
+"""
+#Palindrome Checking
+n = input("Enter the name: ")
+print(n)
+a = list(n)
+print(a)
+print(n)
+rev = n[::-1]
+if n == rev:
+    print("It is Palindrome.")
+else:
+    print("It is not the Palindrome.")
+"""
 
+d = {}
+n = int(input("Enter the rnage: "))
+for i in range(n):
+    stud = input("Enter the name of the student: ")
+    dept = input("Enter the department which you belong to: ")
+    age = int(input("Enter your age: "))
+    year = int(input("Enter your year: "))
+    d.setdefault(stud,[]).append(dept)
+    d.setdefault(stud,[]).append(age)
+    d.setdefault(stud,[]).append(year)
+print(d)
+# for x,y in d.items():
+#     print("Your data is:-\nname: %s  department:%s  age:%s  year:%s"% (x,x[0],d[stud][1],d[stud][2]))
+
+def f():
+    search = input("Search the name of students: ")
+    for x,y in d.items():
+        if x==search:
+            print("Student data is:-\nname: %s  department:%s  age:%s  year:%s"% (x,y[0],y[1],y[2]))
+            break
+        else:
+            pass
+f()
+print("Sorry no such student!")
+f()
