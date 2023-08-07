@@ -209,3 +209,97 @@ for x in c:
     print("")
 print("-" * 10 * n)
 """
+
+import os
+
+class Signup:
+    def __init__(self):
+        self.username = input("Enter a username: ")
+        self.password = input("Enter a password: ")
+        self.value = 0
+    def register(self):
+        print("-------------------Registration Page-------------------")
+        # username = input("Enter a username: ")
+        # password = input("Enter a password: ")
+        # value = 0
+
+        f1 = open(f"{self.username}Saving","x")
+        f2 = open(f"{self.username}Credit","x")
+
+        u = ' '.join(format(ord(x), 'b') for x in self.username)
+        p =' '.join(format(ord(x), 'b') for x in self.password)
+        # v =' '.join(format(ord(x), 'b') for x in self.value)
+
+
+        with open(f"{self.username}Saving","a") as file:
+            file.write(f'{u},{p},{self.value}\n')
+        with open(f"{self.username}Credit","a") as file:
+            file.write(f"{u},{p},{self.value}\n")
+        
+        print("Registration Successful!")
+        print("")
+        # Signin.login(self)
+        x = Signin()
+        x.login()
+
+class Signin:
+    def __init__(self):
+        self.username = input("Enter your username: ")
+        self.password = input("Enter your password: ")
+    def login(self):
+        print("-------------------Login Page-------------------")
+        # username = input("Enter your username: ")
+        # password = input("Enter your password: ")
+        try:
+            with open(f"{self.username}Saving","r") as file:
+                for line in file:
+                    stored_username,stored_password,stored_value = line.strip().split(",")
+                    u = ''.join(chr(int(stored_username[i*8:i*8+8],2)) for i in range(len(stored_username)//7))
+                    p = ''.join(chr(int(stored_password[i*8:i*8+8],2)) for i in range(len(stored_password)//7))
+                    if self.username == u and self.password == p:
+                        # print("Login Successful!")
+                        print("Okay!!!")
+                        Signin.delete(self)
+                        return
+            # print("Invalid username or password. Please try again.")
+            print("")
+            self.all()
+        except:
+            print("There is no such file or you may miss the wright username or password information!\nPlease be register!")
+            All.all(self)
+    
+    def delete(self):
+        choose = input("Do you want to delete file?(y/n): ")
+        match choose:
+            case "y":
+                if os.path.exists(f"{self.username}Saving"):
+                    os.remove(f"{self.username}Saving")
+                else:
+                    print("The file does not exist")
+            case _:
+                print("Incorrect!!!")
+        print("Allthing goes wrong")
+
+
+class All:
+    def all(self):
+        print("1.signin\n2.signup\n3.exit")
+        number = int(input("Enter a number: "))
+
+        match number:
+            case 1:
+                # Signin.login(self)
+                x = Signin()
+                x.login()
+            case 2:
+                # Signup.register(self)
+                x = Signup()
+                x.register()
+            case 3:
+                exit
+            case _:
+                print("Please follow the above guide")
+                all()
+
+x = All()
+x.all()

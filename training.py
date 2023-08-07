@@ -145,6 +145,8 @@ else:
     print("It is not the Palindrome.")
 """
 
+"""
+#Student_teacher 
 d = {}
 n = int(input("Enter the rnage: "))
 for i in range(n):
@@ -170,3 +172,4 @@ def f():
 f()
 print("Sorry no such student!")
 f()
+"""
